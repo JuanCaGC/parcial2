@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 /* archivo src/shared/testing-utils/typeorm-testing-config.ts*/
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AlbumEntity } from 'src/album/album.entity';
-import { TrackEntity } from 'src/track/track.entity';
-import { PerformerEntity } from 'src/performer/performer.entity';
+import { AlbumEntity } from '../../album/album.entity';
+import { TrackEntity } from '../../track/track.entity';
+import { PerformerEntity } from '../../performer/performer.entity';
 
 
 export const TypeOrmTestingConfig = () => [

@@ -13,13 +13,13 @@ export class AlbumService {
 
     async create(album: AlbumEntity): Promise<AlbumEntity> {
         if (!album.nombre || !album.descripcion) {
-            throw new BusinessLogicException("nombre and descripcion are required for the album", BusinessError.BAD_REQUEST);
+            throw new BusinessLogicException("nombre and descripcion are required for create the album", BusinessError.BAD_REQUEST);
         }
         return await this.albumRepository.save(album);
     }
 
     async findOne(id: string): Promise<AlbumEntity> {
-        const album: AlbumEntity = await this.albumRepository.findOne({where: {id}, relations: ["tracks", "performers"] } );
+        const album: AlbumEntity = await this.albumRepository.findOne({where: {id}, relations: ["tracks", "performers"] } )
         if (!album)
           throw new BusinessLogicException("The album with the given id was not found", BusinessError.NOT_FOUND);
    
@@ -27,7 +27,7 @@ export class AlbumService {
     }
 
     async findAll(): Promise<AlbumEntity[]> {
-        return await this.albumRepository.find({ relations: ["tracks", "performers"] });
+        return await this.albumRepository.find({ relations: ["tracks", "performers"] })
     }
 
     async delete(id: string) {

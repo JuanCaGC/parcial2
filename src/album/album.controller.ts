@@ -25,6 +25,7 @@ export class AlbumController {
   async create(@Body() albumDto: AlbumDto) 
   {
     const album: AlbumEntity = plainToInstance(AlbumEntity, albumDto)
+    album.fechaLanzamiento = new Date(album.fechaLanzamiento);
     return await this.albumService.create(album);
   }
 

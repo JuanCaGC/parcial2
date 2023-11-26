@@ -1,0 +1,203 @@
+{
+	"info": {
+		"_postman_id": "6edfdd96-fb7d-48cc-876c-98bab7c14efb",
+		"name": "AlbumsPerformers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31184512"
+	},
+	"item": [
+		{
+			"name": "Add a Album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"album_id1\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Animales\",\r\n    \"caratula\": \"Caratula de Animales\",\r\n    \"fechaLanzamiento\": \"2023-11-26\",\r\n    \"descripcion\": \"Descripcion de Animales\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/albums",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"albums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a Performer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"performer_id1\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Performer Animales\",\r\n    \"imagen\": \"Performer imagen\",\r\n    \"descripcion\": \"Performer descripcion\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/performers",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"performers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a Performer to a Album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/albums/{{album_id1}}/performers/{{performer_id1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"albums",
+						"{{album_id1}}",
+						"performers",
+						"{{performer_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a Performer to an invalid Album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"\tpm.response.to.have.status(404);\r",
+							"\t});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"\tvar data = pm.response.json();\r",
+							"\tpm.expect(data.message).to.eql(\"The album with the given id was not found\");\r",
+							"\t});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/albums/00000000-0000-0000-0000-000000000000/performers/{{performer_id1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"albums",
+						"00000000-0000-0000-0000-000000000000",
+						"performers",
+						"{{performer_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add an invalid a Performer to a Album Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"\tpm.response.to.have.status(404);\r",
+							"\t});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"\tvar data = pm.response.json();\r",
+							"\tpm.expect(data.message).to.eql(\"The performer with the given id was not found\");\r",
+							"\t});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/albums/{{album_id1}}/performers/00000000-0000-0000-0000-000000000000",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"albums",
+						"{{album_id1}}",
+						"performers",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

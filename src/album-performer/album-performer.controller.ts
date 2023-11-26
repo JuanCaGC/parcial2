@@ -8,8 +8,8 @@ import { AlbumPerformerService } from './album-performer.service';
 export class AlbumPerformerController {
    constructor(private readonly albumPerformerService: AlbumPerformerService){}
 
-   @Post(':museumId/artworks/:artworkId')
-   async addArtworkMuseum(@Param('albumId') albumId: string, @Param('performerId') performerId: string){
+   @Post(':albumId/performers/:performerId')
+   async addPerformerToAlbum(@Param('albumId') albumId: string, @Param('performerId') performerId: string){
        return await this.albumPerformerService.addPerformerToAlbum(albumId, performerId);
    }
 }

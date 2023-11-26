@@ -9,11 +9,11 @@ export class AlbumDto {
     @IsNotEmpty()
     readonly caratula: string;
 
-    @IsDate()
-    @IsNotEmpty()
-    readonly fechaLanzamiento: Date;
-
     @IsString()
     @IsNotEmpty()
+    readonly fechaLanzamiento: string;
+
+    @IsString()
+
     readonly descripcion: string;
 }

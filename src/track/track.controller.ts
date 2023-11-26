@@ -21,8 +21,8 @@ export class TrackController {
     return await this.trackService.findOne(trackId);
   }
 
-  @Post()
-  async create(@Param('albumId') albumId: string, @Body() trackDto: TrackDto) 
+  @Post('album/:albumId')
+  async create(@Body('albumId') albumId: string, @Body() trackDto: TrackDto) 
   {
     const track: TrackEntity = plainToInstance(TrackEntity, trackDto)
     return await this.trackService.create(albumId, track);

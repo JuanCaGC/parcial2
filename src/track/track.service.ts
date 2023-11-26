@@ -25,11 +25,12 @@ export class TrackService {
         if (!associatedAlbum) {
             throw new BusinessLogicException("The associated album does not exist", BusinessError.BAD_REQUEST);
         }
+        track.album = associatedAlbum;
         return await this.trackRepository.save(track);
     }
 
     async findOne(id: string): Promise<TrackEntity> {
-        const track: TrackEntity = await this.trackRepository.findOne({where: {id}, relations: ["albums"] } );
+        const track: TrackEntity = await this.trackRepository.findOne({where: {id}, relations: ["album"] } );
         if (!track)
           throw new BusinessLogicException("The track with the given id was not found", BusinessError.NOT_FOUND);
    
@@ -37,6 +38,6 @@ export class TrackService {
     }
 
     async findAll(): Promise<TrackEntity[]> {
-        return await this.trackRepository.find({ relations: ["albums"] });
+        return await this.trackRepository.find({ relations: ["album"] });
     }
 }
